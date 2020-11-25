@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{602C352A-0E57-402A-B628-78C5B2E5FE8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingsApi", "MeetingsApi\MeetingsApi.csproj", "{0C8D6649-FBE5-48D5-A8D5-93A6CC8E3FDB}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D79A6313-9D9B-44D1-9B20-F6BC65D5C57D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{602C352A-0E57-402A-B628-78C5B2E5FE8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{602C352A-0E57-402A-B628-78C5B2E5FE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{602C352A-0E57-402A-B628-78C5B2E5FE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{602C352A-0E57-402A-B628-78C5B2E5FE8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8D6649-FBE5-48D5-A8D5-93A6CC8E3FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8D6649-FBE5-48D5-A8D5-93A6CC8E3FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8D6649-FBE5-48D5-A8D5-93A6CC8E3FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8D6649-FBE5-48D5-A8D5-93A6CC8E3FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D79A6313-9D9B-44D1-9B20-F6BC65D5C57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D79A6313-9D9B-44D1-9B20-F6BC65D5C57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D79A6313-9D9B-44D1-9B20-F6BC65D5C57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D79A6313-9D9B-44D1-9B20-F6BC65D5C57D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3F1B781-A8E0-4560-A344-06648805AF7E}
+	EndGlobalSection
+EndGlobal

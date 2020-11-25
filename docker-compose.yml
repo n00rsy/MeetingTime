@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+
+  meetingsapi:
+    image: ${DOCKER_REGISTRY-}meetingsapi
+    build:
+      context: .
+      dockerfile: MeetingsApi/Dockerfile
+

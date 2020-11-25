@@ -1,0 +1,66 @@
+{
+  "Routes": [
+
+    {
+      "DownstreamPathTemplate": "/meetings/{id:length(24)}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "meetingsapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/meetings/{id:length(24)}",
+      "UpstreamHttpMethod": [ "PUT", "GET", "DELETE" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/meetings",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "meetingsapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/meetings",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/meetings/{code:length(8)}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "meetingsapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/meetings/{code:length(8)}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId"
+  }
+}
