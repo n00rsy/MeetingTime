@@ -31,6 +31,7 @@ namespace MeetingsApi
             services.Configure<MeetingsDatabaseSettings>(Configuration.GetSection(nameof(MeetingsDatabaseSettings)));
             services.AddSingleton<IMeetingsDatabaseSettings>(sp => sp.GetRequiredService<IOptions<MeetingsDatabaseSettings>>().Value);
             services.AddSingleton<MeetingService>();
+            services.AddSingleton<PersonService>();
             services.AddControllers();
         }
 

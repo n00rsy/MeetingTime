@@ -1,4 +1,5 @@
 ﻿using MeetingsApi.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -22,26 +23,34 @@ namespace MeetingsApi.Services
             _meetings.Find(meeting => true).ToList();
 
         public Meeting Get(string id) =>
-            _meetings.Find<Meeting>(meeting => meeting.Id == id).FirstOrDefault();
+            _meetings.Find<Meeting>(meeting => meeting.id == id).FirstOrDefault();
 
         public Meeting GetByCode(string code) =>
-            _meetings.Find<Meeting>(meeting => meeting.Code == code).FirstOrDefault();
+            _meetings.Find<Meeting>(meeting => meeting.code == code).FirstOrDefault();
 
         public Meeting Create(Meeting meeting)
         {
-            meeting.Code = generateCode();
+            meeting.code = generateCode();
             _meetings.InsertOne(meeting);
             return meeting;
         }
 
-        public void Update(string id, Meeting meetingIn) =>
-            _meetings.ReplaceOne(meeting => meeting.Id == id, meetingIn);
+        public void Replace(string id, Meeting meetingIn) =>
+            _meetings.ReplaceOne(meeting => meeting.id == id, meetingIn);
+
+        public void Update(string id, Meeting meetingIn)
+        {
+ 
+            var update = Builders<Meeting>.Update.Set("class_id", 483);
+            var filter = Builders<Meeting>.Filter.Eq("Id", id);
+            _meetings.UpdateOne(filter, update);
+        }
 
         public void Remove(Meeting meetingIn) =>
-            _meetings.DeleteOne(meeting => meeting.Id == meetingIn.Id);
+            _meetings.DeleteOne(meeting => meeting.id == meetingIn.id);
 
         public void Remove(string id) =>
-            _meetings.DeleteOne(meeting => meeting.Id == id);
+            _meetings.DeleteOne(meeting => meeting.id == id);
 
 
         private Random random = new Random();
@@ -58,7 +67,7 @@ namespace MeetingsApi.Services
             while(!unique)
             {
                 code = randomString(8);
-                if(_meetings.CountDocuments<Meeting>(meeting => meeting.Code == code) == 0)
+                if(_meetings.CountDocuments<Meeting>(meeting => meeting.code == code) == 0)
                 {
                     unique = true;
                 }

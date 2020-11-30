@@ -9,24 +9,15 @@ namespace MeetingsApi.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-        public string Code { get; set; }
-        [BsonElement("Name")]
-        public string MeetingName { get; set; }
-        public TimeInterval[] PossibleTimes { get; set; }
-        public Person[] People { get; set; }
-
-    }
-
-    public class Person
-    {
+        public string id { get; set; }
+        public string code { get; set; }
         public string name { get; set; }
-        public TimeInterval[] available { get; set; }
-    }
-
-    public class TimeInterval
-    {
-        public DateTime start { get; set; }
-        public DateTime end { get; set; }
+        public string description { get; set; }
+        public DateTime[] dates { get; set; }
+        public string[] days { get; set; }
+        // in UTC
+        public int startTime { get; set; }
+        public int endTime { get; set; }
+        public Person[] people { get; set; }
     }
 }

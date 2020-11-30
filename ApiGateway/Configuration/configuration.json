@@ -11,7 +11,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/meetings/{id:length(24)}",
-      "UpstreamHttpMethod": [ "PUT", "GET", "DELETE" ],
+      "UpstreamHttpMethod": [ "PUT", "PATCH", "GET", "DELETE" ],
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
@@ -57,8 +57,27 @@
         "PeriodTimespan": 1,
         "Limit": 1
       }
-    }
+    },
 
+    {
+      "DownstreamPathTemplate": "/people/{id:length(24)}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "meetingsapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/people/{id:length(24)}",
+      "UpstreamHttpMethod": ["POST", "PUT", "PATCH", "GET", "DELETE" ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    }
   ],
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId"

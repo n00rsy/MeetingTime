@@ -51,10 +51,25 @@ namespace MeetingsApi.Controllers
         {
             _meetingService.Create(meeting);
 
-            return CreatedAtRoute("GetMeeting", new { id = meeting.Id.ToString() }, meeting);
+            return CreatedAtRoute("GetMeeting", new { id = meeting.id.ToString() }, meeting);
         }
 
         [HttpPut("{id:length(24)}")]
+        public IActionResult Replace(string id, Meeting meetingIn)
+        {
+            var meeting = _meetingService.Get(id);
+
+            if (meeting == null)
+            {
+                return NotFound();
+            }
+
+            _meetingService.Replace(id, meetingIn);
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id:length(24)}")]
         public IActionResult Update(string id, Meeting meetingIn)
         {
             var meeting = _meetingService.Get(id);
@@ -79,7 +94,7 @@ namespace MeetingsApi.Controllers
                 return NotFound();
             }
 
-            _meetingService.Remove(meeting.Id);
+            _meetingService.Remove(meeting.id);
 
             return NoContent();
         }
