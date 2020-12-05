@@ -12,11 +12,9 @@ namespace MeetingsApi.Services
     public class PersonService
     {
         private readonly IMongoCollection<Meeting> _meetings;
-        private readonly MeetingService _meetingService;
 
         public PersonService(MeetingService meetingService, IMeetingsDatabaseSettings settings)
         {
-            _meetingService = meetingService;
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
@@ -25,20 +23,16 @@ namespace MeetingsApi.Services
 
         public Person Create(string id, Person person)
         {
-            Meeting meeting = _meetingService.Get(id);
-            if (meeting.people.Length == 100)
+            if(person.password != null)
             {
-                // return error
+                person.salt = generateSalt();
+                person.password = hash(person.password, person.salt);
             }
-            foreach (Person _person in meeting.people)
+            if(person.available == null)
             {
-                if (_person.name.Equals(person.name))
-                {
-                    // return error
-                }
+                Meeting meeting = _meetings.Find<Meeting>(meeting => meeting.id == id).FirstOrDefault();
+                person.available = new bool [meeting.numDays * meeting.numTimeslots];
             }
-            person.salt = generateSalt();
-            person.password = hash(person.password, person.salt);
             var filter = Builders<Meeting>.Filter.Eq(m => m.id, id);
             var update = Builders<Meeting>.Update.Push(m => m.people, person);
             _meetings.UpdateOne(filter, update);
@@ -68,6 +62,15 @@ namespace MeetingsApi.Services
             _meetings.UpdateOne(filter, update);
         }
 
+        public void Replace(string id, Person person)
+        {
+            var filter = Builders<Meeting>.Filter.Eq(m => m.id, id)
+                & Builders<Meeting>.Filter.ElemMatch(m => m.people, Builders<Person>.Filter.Eq(p => p.name, person.name));
+            var update = Builders<Meeting>.Update.Set(m => m.people[-1], person);
+
+            _meetings.UpdateOne(filter, update);
+        }
+        
         public void Remove(string id, Person person)
         {
             var filter = Builders<Meeting>.Filter.Eq(m => m.id, id)
@@ -86,7 +89,7 @@ namespace MeetingsApi.Services
             }
             return salt;
         }
-        private string hash(string password, byte[] salt)
+        public string hash(string password, byte[] salt)
         {
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(
             password: password,

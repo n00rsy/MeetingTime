@@ -18,6 +18,8 @@ namespace MeetingsApi.Models
         // in UTC
         public int startTime { get; set; }
         public int endTime { get; set; }
-        public Person[] people { get; set; }
+        public int numDays { get; set; }
+        public int numTimeslots { get; set; }
+        public List<Person> people { get; set; }
     }
 }

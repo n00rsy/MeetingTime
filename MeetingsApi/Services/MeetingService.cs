@@ -31,6 +31,12 @@ namespace MeetingsApi.Services
         public Meeting Create(Meeting meeting)
         {
             meeting.code = generateCode();
+            meeting.numDays = Math.Max(meeting.days.Length, meeting.dates.Length);
+            meeting.numTimeslots = (meeting.endTime - meeting.startTime) * 4;
+            if (meeting.people == null)
+            {
+                meeting.people = new List<Person>();
+            }
             _meetings.InsertOne(meeting);
             return meeting;
         }
