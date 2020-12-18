@@ -42,7 +42,6 @@ namespace MeetingsApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseRouting();
 
             app.UseAuthorization();

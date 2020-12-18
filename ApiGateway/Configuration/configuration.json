@@ -15,9 +15,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
+        "Period": "20s",
+        "PeriodTimespan": 10,
+        "Limit": 20
       }
     },
     {
@@ -34,9 +34,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
+        "Period": "20s",
+        "PeriodTimespan": 10,
+        "Limit": 20
       }
     },
     {
@@ -53,9 +53,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
+        "Period": "20s",
+        "PeriodTimespan": 10,
+        "Limit": 20
       }
     },
 
@@ -73,9 +73,9 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
+        "Period": "20s",
+        "PeriodTimespan": 10,
+        "Limit": 20
       }
     }
   ],

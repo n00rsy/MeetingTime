@@ -1,6 +1,7 @@
 ﻿using MeetingsApi.Models;
 using MeetingsApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace MeetingsApi.Controllers
@@ -83,6 +84,7 @@ namespace MeetingsApi.Controllers
         [HttpPatch("{id:length(24)}")]
         public IActionResult Update(string id, Person personIn)
         {
+            Console.WriteLine(personIn.available);
             var people = _personService.Get(id);
 
             if (people == null)

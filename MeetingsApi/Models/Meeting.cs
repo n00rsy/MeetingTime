@@ -13,9 +13,11 @@ namespace MeetingsApi.Models
         public string code { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+        public string surveyUsing { get; set; }
+        public DateTime expiration { get; set; }
         public DateTime[] dates { get; set; }
         public string[] days { get; set; }
-        // in UTC
+        public string timezone { get; set; }
         public int startTime { get; set; }
         public int endTime { get; set; }
         public int numDays { get; set; }

@@ -31,8 +31,34 @@ namespace MeetingsApi.Services
         public Meeting Create(Meeting meeting)
         {
             meeting.code = generateCode();
-            meeting.numDays = Math.Max(meeting.days.Length, meeting.dates.Length);
             meeting.numTimeslots = (meeting.endTime - meeting.startTime) * 4;
+            if(meeting.surveyUsing == "Days")
+            {
+                meeting.numDays = meeting.days.Length;
+                // sort days and map to strings
+                var daymap = new Dictionary<string, string>
+                {
+                    { "0", "Sun" },
+                    { "1", "Mon" },
+                    { "2", "Tue" },
+                    { "3", "Wed" },
+                    { "4", "Thu" },
+                    { "5", "Fri" },
+                    { "6", "Sat" },
+                };
+                Array.Sort(meeting.days);
+                for(int i = 0; i < meeting.days.Length; i++)
+                {
+                    meeting.days[i] = daymap[meeting.days[i]];
+                }
+                meeting.numDays = meeting.days.Length;
+                meeting.expiration = DateTime.Today.AddDays(30);
+            }
+            else
+            {
+                meeting.numDays = meeting.dates.Length;
+                meeting.expiration = meeting.dates[meeting.dates.Length - 1].AddDays(30);
+            }
             if (meeting.people == null)
             {
                 meeting.people = new List<Person>();
